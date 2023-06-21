@@ -5,7 +5,7 @@ namespace MinotaurLabyrinthTest
     [TestClass]
     public class Tests
     {
-        /*
+        
         [TestMethod]
         public void PitRoomTest()
         {
@@ -56,9 +56,7 @@ namespace MinotaurLabyrinthTest
             minotaur.Activate(hero,map);
             Assert.AreEqual(hero.Location,new Location(2,3));
         }
-        */
         [TestMethod]
-
         public void GelMoveTest()
         {
             Hero hero = new Hero();
