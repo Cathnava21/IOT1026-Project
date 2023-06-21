@@ -8,13 +8,16 @@
 
         private readonly List<IMoveable> _moveables = new List<IMoveable>();
 
-        public void AddMoveable (IMoveable moveable){
+        public void AddMoveable(IMoveable moveable)
+        {
             _moveables.Add(moveable);
         }
 
-        public void ExecuteMovement( Hero hero,Map map){
-            foreach (var moveable in _moveables){
-                moveable.Move (hero,map);
+        public void ExecuteMovement(Hero hero, Map map)
+        {
+            foreach (var moveable in _moveables)
+            {
+                moveable.Move(hero, map);
             }
         }
 

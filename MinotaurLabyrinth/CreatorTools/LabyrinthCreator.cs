@@ -110,9 +110,9 @@
             Room room = map.GetRoomAtLocation(minotaurLocation);
             room.AddMonster(new Minotaur());
             Location gelLocation = ProceduralGenerator.GetRandomLocation();
-            GelatinousCube gel = new GelatinousCube (gelLocation);
+            GelatinousCube gel = new GelatinousCube(gelLocation);
             map.GetRoomAtLocation(gelLocation).AddMonster(new GelatinousCube(gelLocation));
-            map.AddMoveable(gel);        
+            map.AddMoveable(gel);
         }
     }
 }

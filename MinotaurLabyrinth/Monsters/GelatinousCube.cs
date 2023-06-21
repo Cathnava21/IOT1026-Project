@@ -7,12 +7,14 @@
     {
         private Location _location;
 
-        public GelatinousCube (Location location){
+        public GelatinousCube(Location location)
+        {
             _location = location;
-            
+
         }
 
-        public Location getLocation() {
+        public Location getLocation()
+        {
             return _location;
         }
         public override void Activate(Hero hero, Map map)
@@ -33,10 +35,62 @@
         }
 
         public void Move(Hero hero, Map map)
-        {   
-            map.GetRoomAtLocation(_location).RemoveMonster();
-            _location = new Location (_location.Row +1, _location.Column);
-            map.GetRoomAtLocation(_location).AddMonster(this);
+        {
+            var heroLocation = new.Location;
+            int dx = heroLocation.Column - _location.Column;
+            int dy = heroLocation.Row - _location.Row;
+
+            Location? newLocation;
+            if (Math.Abs(dx) <= 1 && Math.Abs(dy) <= 1)
+            {
+                newLocation = SwapLocation(map,_location,heroLocation);
+                Activate(hero,map);
+            }
+            else
+            {
+                if (Math.Abs(dx) > Math.Abs(dy))
+                {
+                    if (dx > 0)
+                    {
+                        var swapLocation = new Location(_location.Row, _location.Column + 1);
+                        newLocation = SwapLocation(map, _location, swapLocation);
+                    }
+                    else
+                    {
+                        var swapLocation = new Location(_location.Row, _location.Column - 1);
+                        newLocation = SwapLocation(map, _location, swapLocation);
+                    }
+                }
+                else
+                {
+                    if (dy > 0)
+                    {
+                        var swapLocation = new Location(_location.Column, _location.Row + 1);
+                        newLocation = SwapLocation(map, _location, swapLocation);
+                    }
+                    else
+                    {
+                        var swapLocation = new Location(_location.Column, _location.Row - 1);
+                        newLocation = SwapLocation(map, _location, swapLocation);
+                    }
+                }
+                //This means the gel was not able to move
+                if (newLocation == null)
+                {
+                    ConsoleHelper.WriteLine ("You hear a frustated gurgling noise from somewhere within the catacombs",ConsoleColor.DarkGreen);
+                }
+            }
+        }
+        private Location? SwapLocation(Map map, Location currentLocation, Location newLocation)
+        {
+            if (map.IsOnMap(newLocation) && !map.GetRoomAtLocation(newLocation).IsActive)
+            {
+                map.GetRoomAtLocation(currentLocation).RemoveMonster();
+                map.GetRoomAtLocation(newLocation).AddMonster(this);
+                _location = newLocation;
+                return newLocation;
+            }
+            return null;
         }
     }
 }
