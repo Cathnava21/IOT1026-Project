@@ -92,5 +92,15 @@ namespace MinotaurLabyrinthTest
             expectedLocation = new Location(1, 1);
             Assert.AreEqual(expectedLocation, gel.GetLocation());
         }
+        [TestMethod]
+        public void HeroKillTest()
+        {
+            Hero hero = new Hero();
+
+            hero.Kill("You have been slain!");
+
+            Assert.IsFalse(hero.IsAlive);
+
+        }
     }
 }
