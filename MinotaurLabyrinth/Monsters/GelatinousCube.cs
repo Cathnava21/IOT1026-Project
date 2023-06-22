@@ -42,7 +42,7 @@
             Location? newLocation;
             if (Math.Abs(dx) <= 1 && Math.Abs(dy) <= 1)
             {
-                newLocation = SwapLocation(map,_location,heroLocation);
+                newLocation = SwapLocation(map, _location, heroLocation);
                 if (newLocation != null)
                 {
                     // Successfully moved to the hero's location
@@ -81,7 +81,7 @@
                 //This means the gel was not able to move
                 if (newLocation == null)
                 {
-                    ConsoleHelper.WriteLine ("You hear a frustated gurgling noise from somewhere within the catacombs",ConsoleColor.DarkGreen);
+                    ConsoleHelper.WriteLine("You hear a frustated gurgling noise from somewhere within the catacombs", ConsoleColor.DarkGreen);
                 }
             }
 
