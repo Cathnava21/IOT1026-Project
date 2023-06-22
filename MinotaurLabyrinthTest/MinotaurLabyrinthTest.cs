@@ -12,16 +12,16 @@ namespace MinotaurLabyrinthTest
             //Seed the RandomNumberGenerator 
             RandomNumberGenerator.SetSeed(1);
 
-            Pit PitRoom = new Pit();
+            Pit pitRoom = new Pit();
             Hero hero = new Hero();
             Map map = new Map(1, 1);
 
-            PitRoom.Activate(hero, map);
-            Assert.AreEqual(PitRoom.IsActive, false);
+            pitRoom.Activate(hero, map);
+            Assert.AreEqual(pitRoom.IsActive, false);
             Assert.AreEqual(hero.IsAlive, true);
 
             hero.HasSword = true;
-            PitRoom.Activate(hero, map);
+            pitRoom.Activate(hero, map);
             Assert.AreEqual(hero.IsAlive, true);
 
             Pit newPitRoom = new Pit();
@@ -69,7 +69,7 @@ namespace MinotaurLabyrinthTest
             map.GetRoomAtLocation(gelLocation).AddMonster(gel);
             gel.Move(hero, map);
 
-            Assert.AreEqual(heroLocation, gel.getLocation());
+            Assert.AreEqual(heroLocation, gel.GetLocation());
             Assert.IsFalse(hero.IsAlive);
         }
         [TestMethod]
@@ -86,11 +86,11 @@ namespace MinotaurLabyrinthTest
             gel.Move(hero, map);
             //The gelatinous cube can not move 
             var expectedLocation = new Location(1, 1);
-            Assert.AreEqual(expectedLocation, gel.getLocation());
+            Assert.AreEqual(expectedLocation, gel.GetLocation());
             gel.Move(hero, map);
             //The gelatinous cube can not move 
             expectedLocation = new Location(1, 1);
-            Assert.AreEqual(expectedLocation, gel.getLocation());
+            Assert.AreEqual(expectedLocation, gel.GetLocation());
         }
     }
 }

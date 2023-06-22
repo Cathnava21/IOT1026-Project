@@ -13,7 +13,7 @@
 
         }
 
-        public Location getLocation()
+        public Location GetLocation()
         {
             return _location;
         }
