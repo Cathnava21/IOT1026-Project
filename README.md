@@ -17,6 +17,10 @@ The object of the game is to take the sword and successfully escape from the maz
 
 ¡Good luck!
 
+![image](https://github.com/Cathnava21/IOT1026-Project/assets/131034603/4655ad6c-e196-442d-9d93-ec0ac254c28c)
+![image](https://github.com/Cathnava21/IOT1026-Project/assets/131034603/75a00773-35f1-47ca-a238-b1d4318c12f9)
+
+
 [Assignment Instructions](docs/instructions.md)  
 [How to start coding](docs/how-to-use.md)  
 [How to update status badges](docs/how-to-update-badges.md)
