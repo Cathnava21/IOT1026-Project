@@ -19,15 +19,14 @@
         }
         public override void Activate(Hero hero, Map map)
         {
-            ConsoleHelper.WriteLine("You have encountered the minotaur! He charges at you and knocks you into another room.", ConsoleColor.Magenta);
+            ConsoleHelper.WriteLine("The Gelatinous Cube achieved its mission and managed to reach you", ConsoleColor.Magenta);
+            hero.Kill("You can't breathe and you die.");
         }
-
 
         public override bool DisplaySense(Hero hero, int heroDistance)
         {
             return false;
         }
-
 
         public override DisplayDetails Display()
         {
@@ -36,7 +35,7 @@
 
         public void Move(Hero hero, Map map)
         {
-            var heroLocation = new.Location;
+            var heroLocation = hero.Location;
             int dx = heroLocation.Column - _location.Column;
             int dy = heroLocation.Row - _location.Row;
 
@@ -44,7 +43,12 @@
             if (Math.Abs(dx) <= 1 && Math.Abs(dy) <= 1)
             {
                 newLocation = SwapLocation(map,_location,heroLocation);
-                Activate(hero,map);
+                if (newLocation != null)
+                {
+                    // Successfully moved to the hero's location
+                    _location = newLocation;
+                    Activate(hero, map);
+                }
             }
             else
             {
@@ -80,6 +84,7 @@
                     ConsoleHelper.WriteLine ("You hear a frustated gurgling noise from somewhere within the catacombs",ConsoleColor.DarkGreen);
                 }
             }
+
         }
         private Location? SwapLocation(Map map, Location currentLocation, Location newLocation)
         {
@@ -94,3 +99,5 @@
         }
     }
 }
+
+

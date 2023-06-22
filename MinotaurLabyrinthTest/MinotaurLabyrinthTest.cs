@@ -17,7 +17,7 @@ namespace MinotaurLabyrinthTest
             Map map = new Map (1,1);
 
             PitRoom.Activate (hero,map);
-            Assert.AreEqual (PitRoom.IsActivate,false);
+            Assert.AreEqual (PitRoom.IsActive,false);
             Assert.AreEqual (hero.IsAlive,true);
 
             hero.HasSword = true;
@@ -57,36 +57,39 @@ namespace MinotaurLabyrinthTest
             Assert.AreEqual(hero.Location,new Location(2,3));
         }
         [TestMethod]
-        public void GelMoveTest()
+        public void GelatinousMove()
         {
-            Hero hero = new Hero();
-            var gelLocation = new Location(1, 1);
+            // Arrange
+            var heroLocation = new Location(5, 5);
+            var gelLocation = new Location(6, 6);
             GelatinousCube gel = new(gelLocation);
-            Map map = new Map(4, 4);
+            Hero hero = new (heroLocation);
+            Map map = new Map (8,8);
+
             map.GetRoomAtLocation(gelLocation).AddMonster(gel);
             gel.Move(hero, map);
-            //New location should be (2,1)
-            var expectedLocation = new Location(2, 1);
-            Assert.AreEqual(expectedLocation, gel.getLocation());
-            gel.Move(hero, map);
-            expectedLocation = new Location(3, 1);
-            Assert.AreEqual(expectedLocation, gel.getLocation());
-            gel.Move(hero, map);
-            expectedLocation = new Location(3, 1);
-            Assert.AreEqual(expectedLocation, gel.getLocation());
+
+            Assert.AreEqual(heroLocation, gel.getLocation());
+            Assert.IsFalse(hero.IsAlive);
         }
         [TestMethod]
         public void GelMoveToActiveTest()
         {
-            Hero hero = new Hero();
+            var heroLocation = new Location(5, 5);
             var gelLocation = new Location(1, 1);
-            GelatinousCube gel = new(gelLocation);
-            Map map = new Map(4, 4);
+            var hero = new Hero(heroLocation);
+            var gel = new GelatinousCube(gelLocation);
+            var map = new Map(4, 4);
             map.GetRoomAtLocation(gelLocation).AddMonster(gel);
-            map.SetRoomAtLocation(new Location(2, 1), RoomType.Pit);
+            map.SetRoomAtLocation(new Location(1, 2), RoomType.Pit);
+
             gel.Move(hero, map);
-            //New location should be (1,1)
+            //The gelatinous cube can not move 
             var expectedLocation = new Location(1, 1);
+            Assert.AreEqual(expectedLocation, gel.getLocation());
+            gel.Move(hero, map);
+            //The gelatinous cube can not move 
+            expectedLocation = new Location(1, 1);
             Assert.AreEqual(expectedLocation, gel.getLocation());
         }
     }
