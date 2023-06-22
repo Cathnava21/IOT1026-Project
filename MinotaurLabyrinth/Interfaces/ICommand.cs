@@ -15,6 +15,16 @@
         public void Execute(Hero hero, Map map)
         {
             Console.WriteLine("This is a secret command.");
+            if (hero.HasSword)
+            {
+                ConsoleHelper.WriteLine("You teleport out of the maze.", ConsoleColor.Green);
+                hero.IsVictorious = true;
+            }
+            else
+            {
+                ConsoleHelper.WriteLine("Activate the summoning power now you have the sword.", ConsoleColor.Green);
+                hero.HasSword = true;
+            }
         }
     }
 

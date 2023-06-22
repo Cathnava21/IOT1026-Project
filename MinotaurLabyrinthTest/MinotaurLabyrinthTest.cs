@@ -93,14 +93,51 @@ namespace MinotaurLabyrinthTest
             Assert.AreEqual(expectedLocation, gel.GetLocation());
         }
         [TestMethod]
-        public void HeroKillTest()
+        public void Secretcommand()
         {
-            Hero hero = new Hero();
+            var heroLocation = new Location(5, 5);
+            var gelLocation = new Location(1, 1);
+            var hero = new Hero(heroLocation);
+            var gel = new GelatinousCube(gelLocation);
+            var map = new Map(4, 4);
+            map.GetRoomAtLocation(gelLocation).AddMonster(gel);
+            map.SetRoomAtLocation(new Location(1, 2), RoomType.Pit);
 
-            hero.Kill("You have been slain!");
+            gel.Move(hero, map);
+            //The gelatinous cube can not move 
+            var expectedLocation = new Location(1, 1);
+            Assert.AreEqual(expectedLocation, gel.GetLocation());
+            gel.Move(hero, map);
+            //The gelatinous cube can not move 
+            expectedLocation = new Location(1, 1);
+            Assert.AreEqual(expectedLocation, gel.GetLocation());
+        }
+        [TestMethod]
+        public void SecretCommandWithoutSword()
+        {
+            var hero = new Hero();
+            var map = new Map(4, 4);
+            var secretCommand = new SecretCommand();
 
-            Assert.IsFalse(hero.IsAlive);
+            hero.HasSword = false;
+            secretCommand.Execute(hero, map);
 
+            Assert.IsTrue(hero.HasSword);
+            Assert.IsFalse(hero.IsVictorious);
+        }
+        [TestMethod]
+        public void SecretCommandWithSword()
+        {
+            // Arrange
+            var hero = new Hero();
+            var map = new Map(4, 4);
+            hero.HasSword = true;
+            var secretCommand = new SecretCommand();
+            hero.HasSword = true;
+            secretCommand.Execute(hero, map);
+
+            Assert.IsTrue(hero.HasSword);
+            Assert.IsTrue(hero.IsVictorious);
         }
     }
 }
